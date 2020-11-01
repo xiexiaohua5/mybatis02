@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.hua.mybatis.mapper.OrderItemMapper">
+  <resultMap id="BaseResultMap" type="com.qf.hua.mybatis.entity.OrderItem">
+    <!--@mbg.generated-->
+    <!--@Table order_item-->
+    <id column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_img" jdbcType="VARCHAR" property="productImg" />
+    <result column="product_price" jdbcType="DECIMAL" property="productPrice" />
+    <result column="product_quantity" jdbcType="INTEGER" property="productQuantity" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    item_id, order_id, product_name, product_img, product_price, product_quantity
+  </sql>
+
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.hua.mybatis.mapper.Order1Mapper">
+  <resultMap id="BaseResultMap" type="com.qf.hua.mybatis.entity.Order1">
+    <!--@mbg.generated-->
+    <!--@Table order1-->
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="order_no" jdbcType="INTEGER" property="orderNo" />
+    <result column="create_date" jdbcType="INTEGER" property="createDate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    order_id, order_no, create_date, `status`, user_id
+  </sql>
+
+  <resultMap id="associationResultMap" type="com.qf.hua.mybatis.entity.Order1" extends="BaseResultMap">
+       <!--声明一对一关系-->
+       <association property="user" resultMap="com.qf.hua.mybatis.mapper.UserMapper.BaseResultMap"/>
+  </resultMap>
+
+  <resultMap id="collectionResultMap" type="com.qf.hua.mybatis.entity.Order1" extends="BaseResultMap">
+       <!--声明一对多关系-->
+       <collection property="orderItems" resultMap="com.qf.hua.mybatis.mapper.OrderItemMapper.BaseResultMap"/>
+  </resultMap>
+
+  <select id="selectOrderByOrderId" resultMap="associationResultMap">
+    select o.order_no, o.create_date, o.status, o.user_id, u.username, u.password
+    from order1 o
+    left join user u
+    on o.user_id = u.user_id
+    where o.order_id = #{orderId}
+  </select>
+
+  <select id="selectOrderByUserId" resultMap="BaseResultMap">
+    select o.order_id, o.order_no, o.create_date, o.user_id, oi.item_id, oi.product_name, oi.product_img, oi.product_price, oi.product_quantity
+    from order1 o
+    left join
+    order_item oi
+    on o.order_id = oi.order_id
+    where o.user_id = #{usrId}
+  </select>
+
+</mapper>
